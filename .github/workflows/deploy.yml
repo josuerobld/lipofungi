@@ -29,7 +29,13 @@ jobs:
         with:
           # undici (dependencia transitiva) exige Node >= 22.19
           node-version: 22
-          cache: npm
+
+      - name: Diagnóstico
+        run: |
+          echo "Node: $(node --version)"
+          echo "NPM: $(npm --version)"
+          echo "Lockfile existe: $(test -f package-lock.json && echo si || echo NO)"
+          ls -la package-lock.json
 
       - name: Instalar dependencias
         run: npm ci
