@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { asset } from '../lib/paths';
 
 export interface Props {
   title?: string;
@@ -12,7 +13,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
-const ogImage = new URL('/logos/logo-blanco.png', Astro.site).toString();
+const ogImage = new URL(asset('/logos/logo-blanco.png'), Astro.site).toString();
 
 // Modo privado (pre-lanzamiento): bloquea indexacion mientras la pagina
 // esta en construccion. Poner en "false" o quitar la variable al lanzar.
@@ -60,8 +61,8 @@ const jsonLd = {
     <meta name="theme-color" content="#1E4530" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/logos/logo-claro.png" />
-    <link rel="apple-touch-icon" href="/logos/logo-claro.png" />
+    <link rel="icon" type="image/png" href={asset('/logos/logo-claro.png')} />
+    <link rel="apple-touch-icon" href={asset('/logos/logo-claro.png')} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
