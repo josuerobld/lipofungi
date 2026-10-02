@@ -27,18 +27,17 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          # undici (dependencia transitiva) exige Node >= 22.19
-          node-version: 22
-
-      - name: Diagnóstico
+          # undici (dependencia transitiva) exige Node >= 22.19.
+          # Se fija 22.x para garantir una version que lo cumpla.
+          node-version: 22.x
+      - name: Verificar version de Node
         run: |
-          echo "Node: $(node --version)"
-          echo "NPM: $(npm --version)"
-          echo "Lockfile existe: $(test -f package-lock.json && echo si || echo NO)"
-          ls -la package-lock.json
+          node --version
+          npm --version
+          echo "major=$(node -p 'process.versions.node.split(".")[0]') minor=$(node -p 'process.versions.node.split(".")[1]')"
 
       - name: Instalar dependencias
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       - name: Construir el sitio
         run: npm run build
