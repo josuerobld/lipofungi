@@ -27,7 +27,8 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # undici (dependencia transitiva) exige Node >= 22.19
+          node-version: 22
           cache: npm
 
       - name: Instalar dependencias
