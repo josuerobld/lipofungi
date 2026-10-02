@@ -1,4 +1,6 @@
 ---
+import { asset } from '../lib/paths';
+
 const email = 'malejandrabarmontepeque@gmail.com';
 const year = new Date().getFullYear();
 const nav = [
@@ -16,7 +18,7 @@ const nav = [
       <!-- Marca -->
       <div>
         <img
-          src="/logos/logo-oscuro.png"
+          src={asset('/logos/logo-oscuro.png')}
           alt="LipoFungi"
           width="170"
           height="50"

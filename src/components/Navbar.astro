@@ -1,4 +1,6 @@
 ---
+import { asset } from '../lib/paths';
+
 const links = [
   { href: '#que-somos', label: 'Qué somos' },
   { href: '#servicio', label: 'Servicio' },
@@ -23,7 +25,7 @@ const links = [
       aria-label="Ir al inicio de LipoFungi"
     >
       <img
-        src="/logos/logo-oscuro.png"
+        src={asset('/logos/logo-oscuro.png')}
         alt="LipoFungi"
         width="150"
         height="44"
@@ -31,7 +33,7 @@ const links = [
         loading="eager"
       />
       <img
-        src="/logos/logo-claro.png"
+        src={asset('/logos/logo-claro.png')}
         alt="LipoFungi"
         width="150"
         height="44"
