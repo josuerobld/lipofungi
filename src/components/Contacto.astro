@@ -1,0 +1,140 @@
+---
+const email = 'malejandrabarmontepeque@gmail.com';
+---
+
+<section
+  id="contacto"
+  class="relative overflow-hidden bg-[var(--color-bosque)] py-24 text-white md:py-32"
+>
+  <div
+    class="pointer-events-none absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-[var(--color-oliva)]/15 blur-3xl animate-float-slow"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.05]"
+    aria-hidden="true"
+    style="background-image: radial-gradient(circle, var(--color-savia) 1px, transparent 1px); background-size: 28px 28px;"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-5 md:px-8">
+    <div class="grid gap-14 lg:grid-cols-2">
+      <!-- Info -->
+      <div>
+        <span
+          class="reveal text-sm font-bold tracking-[0.25em] text-[var(--color-savia)] uppercase"
+          >Contacto</span
+        >
+        <h2
+          class="reveal reveal-d1 mt-4 text-4xl font-black leading-tight tracking-tight sm:text-5xl md:text-6xl"
+        >
+          Hablemos de <span class="text-gradient">tu caso</span>
+        </h2>
+        <p
+          class="reveal reveal-d2 mt-6 max-w-md text-lg leading-relaxed text-[var(--color-salvia)]"
+        >
+          Cuéntanos qué necesitas. Te respondemos con lenguaje claro, directo y
+          con propósito.
+        </p>
+
+        <ul class="mt-10 space-y-5">
+          <li class="reveal reveal-d2 flex items-center gap-4">
+            <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 text-[var(--color-savia)] backdrop-blur">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm text-[var(--color-salvia)]/70">Correo</p>
+              <a href={`mailto:${email}`} class="font-bold text-white transition-colors hover:text-[var(--color-savia)] break-all">{email}</a>
+            </div>
+          </li>
+          <li class="reveal reveal-d3 flex items-center gap-4">
+            <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 text-[var(--color-savia)] backdrop-blur">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm text-[var(--color-salvia)]/70">Ubicación</p>
+              <p class="font-bold text-white">Guatemala</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Formulario -->
+      <div class="reveal reveal-right">
+        <form
+          action={`https://formsubmit.co/${email}`}
+          method="POST"
+          class="rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur md:p-9"
+        >
+          <!-- Config FormSubmit (sin backend propio) -->
+          <input type="hidden" name="_subject" value="Nuevo contacto desde LipoFungi" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="grid gap-5">
+            <div>
+              <label for="nombre" class="mb-2 block text-sm font-bold text-[var(--color-salvia)]">Nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                required
+                autocomplete="name"
+                placeholder="Tu nombre"
+                class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-[var(--color-savia)] focus:bg-white/10 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label for="email" class="mb-2 block text-sm font-bold text-[var(--color-salvia)]">Correo</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="tucorreo@ejemplo.com"
+                class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-[var(--color-savia)] focus:bg-white/10 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label for="asunto" class="mb-2 block text-sm font-bold text-[var(--color-salvia)]">Asunto</label>
+              <input
+                type="text"
+                id="asunto"
+                name="asunto"
+                placeholder="¿En qué te ayudamos?"
+                class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-[var(--color-savia)] focus:bg-white/10 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label for="mensaje" class="mb-2 block text-sm font-bold text-[var(--color-salvia)]">Mensaje</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                required
+                rows="4"
+                placeholder="Cuéntanos sobre tu caso..."
+                class="w-full resize-y rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-[var(--color-savia)] focus:bg-white/10 focus:outline-none"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-oliva)] px-8 py-4 text-base font-black text-white shadow-xl shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--color-savia)] hover:text-[var(--color-bosque-900)]"
+            >
+              Enviar mensaje
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.126A59.768 59.768 0 0 1 21.485 12 59.77 59.77 0 0 1 3.27 20.876L5.999 12Zm0 0h7.5" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

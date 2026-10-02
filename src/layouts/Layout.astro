@@ -1,0 +1,247 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'LipoFungi · Un hongo que come grasa | Biologia aplicada',
+  description = 'LipoFungi convierte un proceso natural en una solucion simple: un hongo que degrada la grasa sin daños al ambiente ni a la salud humana. Biologia aplicada para trampas de grasa.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL('/logos/logo-blanco.png', Astro.site).toString();
+
+// Modo privado (pre-lanzamiento): bloquea indexacion mientras la pagina
+// esta en construccion. Poner en "false" o quitar la variable al lanzar.
+// Uso: PUBLIC_NOINDEX=false npm run build
+const noindex = import.meta.env.PUBLIC_NOINDEX !== 'false';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'LipoFungi',
+  description:
+    'Solucion biologica que degrada la grasa mediante hongos, inspirada en procesos naturales.',
+  url: canonical,
+  logo: ogImage,
+  email: 'malejandrabarmontepeque@gmail.com',
+  slogan: 'La naturaleza puede hacer trabajo complejo de una manera sorprendentemente simple.',
+  areaServed: 'GT',
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO primario -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="author" content="LipoFungi" />
+    <meta
+      name="keywords"
+      content="LipoFungi, hongo come grasa, trampa de grasa, biotecnologia, solucion biologica, degradacion de grasa, sostenible, Guatemala"
+    />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+        <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+      ) : (
+        <meta name="robots" content="index, follow" />
+      )
+    }
+    <meta name="theme-color" content="#1E4530" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logos/logo-claro.png" />
+    <link rel="apple-touch-icon" href="/logos/logo-claro.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LipoFungi" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_GT" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Fuentes: Lato -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap"
+    />
+
+    <!-- Datos estructurados -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-[var(--color-bosque)] focus:px-5 focus:py-3 focus:text-white"
+    >
+      Saltar al contenido
+    </a>
+    <slot />
+
+    <!-- Scroll reveal + smooth scroll + navbar -->
+    <script>
+      const prefersReduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      // --- Scroll reveal ---
+      const revealEls = document.querySelectorAll('.reveal');
+      if (prefersReduced) {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      }
+
+      // --- Navbar scrolled + active link via scrollspy ---
+      const nav = document.getElementById('navbar');
+      const sections = Array.from(
+        document.querySelectorAll('section[id]')
+      ) as HTMLElement[];
+      const navLinks = Array.from(
+        document.querySelectorAll('[data-navlink]')
+      ) as HTMLAnchorElement[];
+
+      const onScroll = () => {
+        if (nav) {
+          if (window.scrollY > 30) nav.classList.add('nav-scrolled');
+          else nav.classList.remove('nav-scrolled');
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Scrollspy
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navLinks.forEach((l) => {
+                l.classList.toggle(
+                  'active',
+                  l.getAttribute('href') === `#${id}`
+                );
+              });
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+      sections.forEach((s) => spy.observe(s));
+
+      // --- Menu movil ---
+      const burger = document.getElementById('burger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      burger?.addEventListener('click', () => {
+        const open = mobileMenu?.classList.toggle('hidden') === false;
+        burger.setAttribute('aria-expanded', String(open));
+      });
+
+      // --- Smooth scroll animado al navegar por anclas ---
+      // Desactivamos el scroll-behavior CSS para controlar duracion/easing via JS.
+      if (!prefersReduced) {
+        document.documentElement.style.scrollBehavior = 'auto';
+      }
+
+      const NAV_OFFSET = 88; // compensa el navbar sticky
+      const DURATION = 850; // ms
+
+      // easeInOutCubic: arranque y frenado suaves
+      const easeInOutCubic = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      let scrollRAF = 0;
+      const animateScrollTo = (targetY: number) => {
+        cancelAnimationFrame(scrollRAF);
+        const startY = window.scrollY;
+        const distance = targetY - startY;
+        if (Math.abs(distance) < 2) return;
+        const startTime = performance.now();
+
+        const step = (now: number) => {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / DURATION, 1);
+          window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+          if (progress < 1) scrollRAF = requestAnimationFrame(step);
+        };
+        scrollRAF = requestAnimationFrame(step);
+      };
+
+      const handleAnchorClick = (e: Event) => {
+        const anchor = (e.currentTarget as HTMLAnchorElement);
+        const hash = anchor.getAttribute('href');
+        if (!hash || !hash.startsWith('#')) return;
+        const target = document.querySelector(hash) as HTMLElement | null;
+        if (!target) return;
+
+        e.preventDefault();
+
+        // Cierra el menu movil si esta abierto
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          burger?.setAttribute('aria-expanded', 'false');
+        }
+
+        if (prefersReduced) {
+          target.scrollIntoView();
+        } else {
+          const top =
+            target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+          animateScrollTo(top);
+        }
+
+        // Actualiza la URL sin salto brusco
+        history.pushState(null, '', hash);
+      };
+
+      document
+        .querySelectorAll('a[href^="#"]')
+        .forEach((a) => a.addEventListener('click', handleAnchorClick));
+
+      // Cancela la animacion si el usuario interactua con el scroll manualmente
+      ['wheel', 'touchstart'].forEach((evt) =>
+        window.addEventListener(
+          evt,
+          () => cancelAnimationFrame(scrollRAF),
+          { passive: true }
+        )
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+# ==============================================================
+# LipoFungi - Landing en modo privado (pre-lanzamiento)
+# ==============================================================
+# La pagina todavia NO debe aparecer en buscadores.
+# Esto evita que Google la indexe mientras esta en construccion.
+
+User-agent: *
+Disallow: /
+
+# Headers de exclusion para otros motores (respaldo adicional)
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+# Sitemap commented out intentionally: no debe enviarse a Google
+# hasta que la pagina este lista para lanzamiento publico.
+# Descomentar antes de publicar:
+# Sitemap: https://<TU-DOMINIO>/sitemap-index.xml

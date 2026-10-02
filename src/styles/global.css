@@ -1,0 +1,305 @@
+@import 'tailwindcss';
+
+/* ===========================================================================
+   LipoFungi · Design Tokens
+   Biologia aplicada · una solucion inspirada en procesos naturales
+   =========================================================================== */
+@theme {
+  /* --- Paleta primaria --- */
+  --color-bosque: #1e4530; /* Bosque LipoFungi */
+  --color-oliva: #8a8819; /* Oliva activo */
+  --color-blanco: #ffffff;
+
+  /* --- Paleta secundaria --- */
+  --color-savia: #a9af45;
+  --color-salvia: #dce5d7;
+  --color-crema: #f5f2e8;
+  --color-carbon: #252b27;
+
+  /* --- Variantes utiles --- */
+  --color-bosque-700: #163525;
+  --color-bosque-900: #0f2419;
+  --color-oliva-600: #6f6d14;
+
+  /* --- Tipografia --- */
+  --font-sans: 'Lato', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+
+  /* --- Transiciones --- */
+  --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ===========================================================================
+   Base
+   =========================================================================== */
+html {
+  scroll-behavior: smooth;
+  /* Compensa el navbar sticky al navegar por anclas */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-crema);
+  color: var(--color-bosque);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-savia);
+  color: var(--color-bosque-900);
+}
+
+/* Focus visible accesible */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-oliva);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ===========================================================================
+   Scroll reveal (IntersectionObserver)
+   =========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--ease-fluid),
+    transform 0.7s var(--ease-fluid);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variantes de direccion */
+.reveal-left {
+  transform: translateX(-36px);
+}
+.reveal-right {
+  transform: translateX(36px);
+}
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+  transform: translateX(0);
+}
+.reveal-scale {
+  transform: scale(0.94);
+}
+.reveal-scale.is-visible {
+  transform: scale(1);
+}
+
+/* Delays escalonados */
+.reveal-d1 {
+  transition-delay: 0.08s;
+}
+.reveal-d2 {
+  transition-delay: 0.16s;
+}
+.reveal-d3 {
+  transition-delay: 0.24s;
+}
+.reveal-d4 {
+  transition-delay: 0.32s;
+}
+
+/* ===========================================================================
+   Animaciones decorativas
+   =========================================================================== */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(3deg);
+  }
+}
+.animate-float {
+  animation: float 7s var(--ease-fluid) infinite;
+}
+.animate-float-slow {
+  animation: float 11s var(--ease-fluid) infinite;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, -24px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+.animate-bounce-soft {
+  animation: bounce-soft 2.4s ease-in-out infinite;
+}
+
+/* Gradiente animado del texto hero */
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.text-gradient {
+  background: linear-gradient(
+    110deg,
+    var(--color-savia),
+    var(--color-oliva),
+    var(--color-salvia),
+    var(--color-savia)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+/* Glass helper */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.glass-dark {
+  background: rgba(30, 69, 48, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(169, 175, 69, 0.25);
+}
+
+/* Navbar scrolled state */
+.nav-scrolled {
+  background: rgba(245, 242, 232, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 30px -12px rgba(30, 69, 48, 0.25);
+  border-bottom: 1px solid rgba(30, 69, 48, 0.08);
+}
+
+/* --- Intercambio de logo segun estado --- */
+.nav-scrolled .logo-top {
+  display: none;
+}
+.nav-scrolled .logo-scrolled {
+  display: block;
+}
+
+/* --- Links en el tope (sobre hero oscuro): claros --- */
+#navbar:not(.nav-scrolled) .nav-link {
+  color: #ffffff;
+}
+#navbar:not(.nav-scrolled) .nav-link:hover {
+  color: var(--color-savia);
+}
+#navbar:not(.nav-scrolled) .nav-link::after {
+  background: var(--color-savia);
+}
+#navbar:not(.nav-scrolled) #burger {
+  color: #ffffff;
+}
+/* Toggle idioma en el tope */
+#navbar:not(.nav-scrolled) .lang-group {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+#navbar:not(.nav-scrolled) .lang-inactive {
+  color: #ffffff;
+}
+
+/* Link underline animado del nav */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-oliva);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-fluid);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Patron de fondo sutil tipo "esporas" */
+.spore-bg {
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(169, 175, 69, 0.08) 0,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(30, 69, 48, 0.06) 0,
+      transparent 40%
+    );
+}
+
+/* ===========================================================================
+   Accesibilidad: reduce-motion
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-float,
+  .animate-float-slow,
+  .animate-bounce-soft,
+  .text-gradient {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

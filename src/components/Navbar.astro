@@ -1,0 +1,180 @@
+---
+const links = [
+  { href: '#que-somos', label: 'Qué somos' },
+  { href: '#servicio', label: 'Servicio' },
+  { href: '#validacion', label: 'Validación' },
+  { href: '#precios', label: 'Precios' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+
+<header
+  id="navbar"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-500"
+>
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 md:px-8"
+    aria-label="Navegación principal"
+  >
+    <!-- Logo -->
+    <a
+      href="#inicio"
+      class="flex shrink-0 items-center gap-2 transition-transform duration-300 hover:scale-105"
+      aria-label="Ir al inicio de LipoFungi"
+    >
+      <img
+        src="/logos/logo-oscuro.png"
+        alt="LipoFungi"
+        width="150"
+        height="44"
+        class="logo-top h-10 w-auto md:h-11"
+        loading="eager"
+      />
+      <img
+        src="/logos/logo-claro.png"
+        alt="LipoFungi"
+        width="150"
+        height="44"
+        class="logo-scrolled hidden h-10 w-auto md:h-11"
+        loading="eager"
+      />
+    </a>
+
+    <!-- Links centrados (desktop) -->
+    <ul
+      class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex"
+    >
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              data-navlink
+              class="nav-link text-sm font-bold tracking-wide text-[var(--color-bosque)] transition-colors duration-300 hover:text-[var(--color-oliva-600)]"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Acciones derecha -->
+    <div class="flex items-center gap-3">
+      <!-- Toggle idioma (solo UI) -->
+      <div
+        class="lang-group hidden items-center overflow-hidden rounded-full border border-[var(--color-bosque)]/20 text-xs font-bold sm:flex"
+        role="group"
+        aria-label="Seleccionar idioma"
+      >
+        <button
+          type="button"
+          class="bg-[var(--color-oliva)] px-3 py-1.5 text-white"
+          aria-pressed="true"
+        >
+          ES
+        </button>
+        <button
+          type="button"
+          class="lang-inactive px-3 py-1.5 text-[var(--color-bosque)] transition-colors hover:bg-[var(--color-salvia)] hover:text-[var(--color-bosque)]"
+          aria-pressed="false"
+          title="Próximamente"
+        >
+          EN
+        </button>
+      </div>
+
+      <!-- CTA -->
+      <a
+        href="#contacto"
+        data-navlink
+        class="hidden rounded-full bg-[var(--color-oliva)] px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-[var(--color-oliva)]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-bosque)] hover:shadow-xl md:inline-block"
+      >
+        Cotizar
+      </a>
+
+      <!-- Burger (mobile) -->
+      <button
+        id="burger"
+        type="button"
+        class="flex h-10 w-10 items-center justify-center rounded-lg text-[var(--color-bosque)] transition-colors hover:bg-[var(--color-salvia)] lg:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="h-6 w-6"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menu movil -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-[var(--color-bosque)]/10 bg-[var(--color-crema)]/95 px-5 py-4 backdrop-blur-xl lg:hidden"
+  >
+    <ul class="flex flex-col gap-1">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="block rounded-lg px-4 py-3 text-base font-bold text-[var(--color-bosque)] transition-colors hover:bg-[var(--color-salvia)]"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="mt-2">
+        <a
+          href="#contacto"
+          class="block rounded-full bg-[var(--color-oliva)] px-4 py-3 text-center text-base font-bold text-white"
+        >
+          Cotizar ahora
+        </a>
+      </li>
+
+      <!-- Toggle idioma (movil) -->
+      <li class="mt-4 border-t border-[var(--color-bosque)]/10 pt-4">
+        <span
+          class="mb-2 block px-1 text-xs font-bold tracking-wider text-[var(--color-oliva-600)] uppercase"
+          >Idioma</span
+        >
+        <div
+          class="flex items-center overflow-hidden rounded-full border border-[var(--color-bosque)]/20 text-sm font-bold"
+          role="group"
+          aria-label="Seleccionar idioma"
+        >
+          <button
+            type="button"
+            class="flex-1 bg-[var(--color-oliva)] px-4 py-2.5 text-center text-white"
+            aria-pressed="true"
+          >
+            ES · Español
+          </button>
+          <button
+            type="button"
+            class="flex-1 px-4 py-2.5 text-center text-[var(--color-bosque)] transition-colors hover:bg-[var(--color-salvia)]"
+            aria-pressed="false"
+            title="Próximamente"
+          >
+            EN · English
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</header>

@@ -1,0 +1,110 @@
+---
+const pasos = [
+  {
+    n: '01',
+    titulo: 'Diagnóstico',
+    texto:
+      'Evaluamos tu trampa de grasa y el volumen de residuos para entender tu caso particular.',
+  },
+  {
+    n: '02',
+    titulo: 'Aplicación',
+    texto:
+      'Introducimos el cultivo fúngico que comienza a degradar la grasa de forma natural.',
+  },
+  {
+    n: '03',
+    titulo: 'Seguimiento',
+    texto:
+      'Acompañamos el proceso con monitoreo y ajustes, resolviendo dudas en cada etapa.',
+  },
+  {
+    n: '04',
+    titulo: 'Resultados',
+    texto:
+      'Menos taponamientos, menos paros operativos y un impacto ambiental reducido.',
+  },
+];
+---
+
+<section
+  id="servicio"
+  class="relative overflow-hidden bg-[var(--color-bosque)] py-24 text-white md:py-32"
+>
+  <!-- Textura de fondo -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.05]"
+    aria-hidden="true"
+    style="background-image: radial-gradient(circle, var(--color-savia) 1px, transparent 1px); background-size: 28px 28px;"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -right-40 top-1/4 h-96 w-96 rounded-full bg-[var(--color-oliva)]/20 blur-3xl animate-float-slow"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-5 md:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <span
+        class="reveal text-sm font-bold tracking-[0.25em] text-[var(--color-savia)] uppercase"
+        >Servicio acompañado</span
+      >
+      <h2
+        class="reveal reveal-d1 mt-4 text-4xl font-black leading-tight tracking-tight sm:text-5xl md:text-6xl"
+      >
+        No te dejamos <span class="text-gradient">solo</span>
+      </h2>
+      <p
+        class="reveal reveal-d2 mt-6 text-lg leading-relaxed text-[var(--color-salvia)] md:text-xl"
+      >
+        La biología hace cosas sorprendentes, pero nosotros hacemos que sea
+        simple de usar. Te acompañamos en cada paso, con lenguaje claro y sin
+        promesas absolutas.
+      </p>
+    </div>
+
+    <!-- Pasos -->
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        pasos.map((p, i) => (
+          <article
+            class={`reveal reveal-d${i + 1} group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:border-[var(--color-savia)]/40 hover:bg-white/[0.08]`}
+          >
+            <span
+              class="block text-5xl font-black text-[var(--color-savia)]/25 transition-colors duration-500 group-hover:text-[var(--color-savia)]/50"
+              >{p.n}</span
+            >
+            <h3 class="mt-3 text-xl font-black text-white">{p.titulo}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-[var(--color-salvia)]/80">
+              {p.texto}
+            </p>
+            {i < pasos.length - 1 && (
+              <svg
+                class="absolute right-5 top-9 hidden h-6 w-6 text-[var(--color-savia)]/30 lg:block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            )}
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Franja de tono de marca -->
+    <div
+      class="reveal reveal-scale mt-16 rounded-2xl border border-[var(--color-savia)]/20 bg-white/[0.03] p-8 text-center backdrop-blur md:p-10"
+    >
+      <p class="text-xl font-bold leading-relaxed md:text-2xl">
+        “LipoFungi convierte un proceso natural en una solución
+        <span class="text-[var(--color-savia)]">simple de entender</span> y
+        <span class="text-[var(--color-savia)]">fácil de reconocer</span>.”
+      </p>
+    </div>
+  </div>
+</section>
