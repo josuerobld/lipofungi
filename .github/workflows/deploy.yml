@@ -27,14 +27,8 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          # undici (dependencia transitiva) exige Node >= 22.19.
-          # Se fija 22.x para garantir una version que lo cumpla.
+          # Astro 7 y undici exigen Node >= 22.12 / >= 22.19
           node-version: 22.x
-      - name: Verificar version de Node
-        run: |
-          node --version
-          npm --version
-          echo "major=$(node -p 'process.versions.node.split(".")[0]') minor=$(node -p 'process.versions.node.split(".")[1]')"
 
       - name: Instalar dependencias
         run: npm ci --no-audit --no-fund
